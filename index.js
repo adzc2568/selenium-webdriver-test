@@ -124,8 +124,9 @@ async function openCrawlerWeb() {
       responseType: 'arraybuffer',
     })
 
-    const name = (imageData.text.match(/名稱:(.*)\n/)?.[1] || imageData.text).replace(
-      /\s|\#|\%|\&|\{|\}|\\|\<|\>|\*|\?|\/|\\|\$\!|\'|\"|\:|\@|\+|\`|\||\=/g,
+    const match = imageData.text.match(/名稱:(.*)\n尺寸:.*\n價格(.*)\n數量/)
+    const name = (match ? `${match[1]}_${match[2]}` : imageData.text).replace(
+      /\s|\n|\#|\%|\&|\{|\}|\\|\<|\>|\*|\?|\/|\\|\$\!|\'|\"|\:|\@|\+|\`|\||\=/g,
       ''
     )
 
