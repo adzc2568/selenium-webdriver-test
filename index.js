@@ -28,7 +28,7 @@ async function openCrawlerWeb() {
 
   console.log('enter album start')
   // nth-child 可選擇第幾個相簿
-  const parentDiv = `div.x9f619.x1r8uery.x1iyjqo2.x6ikm8r.x10wlt62.x1n2onr6:nth-child(1)`
+  const parentDiv = `div.x9f619.x1r8uery.x1iyjqo2.x6ikm8r.x10wlt62.x1n2onr6:nth-child(2)`
   const lengthContainer = await driver.wait(
     webdriver.until.elementLocated(webdriver.By.css(`${parentDiv} div.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.x1vvkbs`))
   )
@@ -36,7 +36,7 @@ async function openCrawlerWeb() {
 
   const titleContainer = await driver.wait(
     webdriver.until.elementLocated(
-      webdriver.By.className(
+      webdriver.By.css(
         `${parentDiv} span.x193iq5w.xeuugli.x13faqbe.x1vvkbs.x1xmvt09.x1lliihq.x1s928wv.xhkezso.x1gmr53x.x1cpjm7i.x1fgarty.x1943h6x.xudqn12.x3x7a5m.x6prxxf.xvq8zen.x1s688f.xzsf02u.x1yc453h`
       )
     )
