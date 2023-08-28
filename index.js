@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 const axios = require('axios')
 const fs = require('node:fs')
 const chrome = require('selenium-webdriver/chrome')
+require('chromedriver')
 
 dotenv.config()
 
@@ -124,14 +125,12 @@ async function openCrawlerWeb() {
       responseType: 'arraybuffer',
     })
 
-    const match = imageData.text.match(/名稱:(.*)\n尺寸:.*\n價格(.*)\n數量/)
-    const name = (match ? `${match[1]}_${match[2]}` : imageData.text).replace(
-      /\s|\n|\#|\%|\&|\{|\}|\\|\<|\>|\*|\?|\/|\\|\$\!|\'|\"|\:|\@|\+|\`|\||\=/g,
-      ''
-    )
+    const name = imageData.text.replace(/\s|\n|\#|\%|\&|\{|\}|\\|\<|\>|\*|\?|\/|\\|\$\!|\'|\"|\@|\+|\`|\||\=/g, '')
+    const match = name.match(/名稱[:：](.*)尺寸[:：].*價格[:：](.*)數量/)
+    const resultName = match ? `${match[1]}_${match[2]}` : name
 
     await new Promise((resolve) => {
-      fs.writeFile(process.cwd() + `${folder}/${name}.jpg`, data, (err) => {
+      fs.writeFile(process.cwd() + `${folder}/${resultName}.jpg`, data, (err) => {
         if (err) console.log(err)
         resolve()
       })
